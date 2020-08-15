@@ -1,3 +1,4 @@
+import logger from "./logger.ts";
 import startTests from "./startTests.ts";
 
 /**
@@ -8,9 +9,11 @@ import startTests from "./startTests.ts";
 const { args } = Deno;
 
 if (!args[0]) {
-  throw new Error('Relying Party URL is required');
+  throw new Error("Relying Party URL is required");
 }
 
 const rpURL = args[0];
 
-await startTests(rpURL);
+const results = await startTests(rpURL);
+
+logger.info(results);
