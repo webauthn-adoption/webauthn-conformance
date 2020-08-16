@@ -7,20 +7,20 @@ export default class HTTPClient {
 
   async postAttestationOptions(opts: AttestationOptionsRequestOpts) {
     return fetch(`${this.url}/attestation/options`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(opts),
     });
   }
 }
 
 type AttestationOptionsRequestOpts = {
-  username: string,
-  displayName: string,
+  username: string;
+  displayName: string;
   // TODO Needs to be `AuthenticatorSelectionCriteria` from lib.dom.d.ts
-  authenticatorSelection: unknown,
+  authenticatorSelection: unknown;
   // TODO Define this properly
-  attestation: unknown,
+  attestation: unknown;
   // TODO Define this properly
-  extensions: unknown,
+  extensions: unknown;
 };

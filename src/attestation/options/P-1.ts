@@ -14,25 +14,33 @@ const identifier: TestIdentifer = {
 export default async function AttestationOptionsP1(
   client: HTTPClient,
 ): Promise<TestSuccess> {
-  logger.info('START AttestationOptionsP1');
+  logger.info("START AttestationOptionsP1");
   try {
     const opts = {
       username: "2cKNGn1rOXC5_C0yR08W",
       displayName: "Lakeesha Hemstreet",
       authenticatorSelection: {
         "requireResidentKey": false,
-        "userVerification": "preferred"
+        "userVerification": "preferred",
       },
       attestation: "direct",
       extensions: {
-        "example.extension": true
-      }
+        "example.extension": true,
+      },
     };
-    const resp = await client.postAttestationOptions(opts).then((resp) => resp.json());
+    const resp = await client.postAttestationOptions(opts).then((resp) =>
+      resp.json()
+    );
     // logger.debug(`P1 - response: ${JSON.stringify(resp, null, 2)}`);
 
-    assert(typeof resp.challenge !== "undefined", "challenge must not be undefined");
-    assert(resp.challenge.length >= 21, "challenge must be at least 21 bytes long");
+    assert(
+      typeof resp.challenge !== "undefined",
+      "challenge must not be undefined",
+    );
+    assert(
+      resp.challenge.length >= 21,
+      "challenge must be at least 21 bytes long",
+    );
   } catch (err) {
     throw new TestFailure(identifier, err.message);
   }
