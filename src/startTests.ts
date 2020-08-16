@@ -1,6 +1,9 @@
 import logger from "./logger.ts";
 import { TestResults, TestIdentifer, TestFailureError } from "./types.ts";
 
+import AttestationOptionsP1 from './attestation/options/P-1.ts';
+import AttestationOptionsP2 from './attestation/options/P-2.ts';
+
 /**
  * Begin conformance tests against the specified Relying Party
  *
@@ -10,26 +13,19 @@ export default async function startTests(rpURL: string): Promise<TestResults> {
   logger.debug(`starting tests against ${rpURL}`);
 
   const promiseResults = await Promise.allSettled([
-    new Promise<string>((resolve, reject) =>
-      setTimeout(() => {
-        resolve("p1");
-      }, 100)
-    ),
-    new Promise<string>((resolve, reject) =>
-      setTimeout(() => {
-        reject("p2");
-      }, 100)
-    ),
+    AttestationOptionsP1(),
+    AttestationOptionsP2(),
   ]);
 
-  const passed: string[] = [];
-  const failed: string[] = [];
+  const passed: TestIdentifer[] = [];
+  const failed: TestIdentifer[] = [];
 
+  // Sort all of the results into passed/failed
   promiseResults.forEach((result) => {
     if (result.status === "fulfilled") {
       passed.push(result.value);
     } else if (result.status === "rejected") {
-      failed.push(result.reason);
+      failed.push((result.reason as TestFailureError).identifier);
     }
   });
 
