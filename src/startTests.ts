@@ -1,9 +1,5 @@
 import logger from "./logger.ts";
-
-type TestResults = {
-  passed: string[];
-  failed: string[];
-};
+import { TestResults, TestIdentifer, TestFailureError } from "./types.ts";
 
 /**
  * Begin conformance tests against the specified Relying Party
