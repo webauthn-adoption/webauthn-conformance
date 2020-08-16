@@ -1,11 +1,9 @@
-import { TestIdentifer } from "../../helpers/types.ts";
+import TestSuccess from "../../helpers/TestSuccess.ts";
 
-export default async function AttestationOptionsP3(): Promise<TestIdentifer> {
-  const result: TestIdentifer = {
+export default async function AttestationOptionsP3(): Promise<TestSuccess> {
+  return new TestSuccess({
     suite: "attestation",
     mode: "options",
     id: "P-3",
-  };
-
-  return result;
+  });
 }

@@ -1,9 +1,10 @@
 /**
  * Test results sorted into pass/fail
  */
-export type TestResults = {
-  passed: TestIdentifer[];
-  failed: TestIdentifer[];
+export type TestResult = {
+  identifier: TestIdentifer;
+  result: "passed" | "failed";
+  reason?: string;
 };
 
 /**
@@ -14,14 +15,3 @@ export type TestIdentifer = {
   mode: "options" | "response";
   id: string;
 };
-
-/**
- * A custom error for us to throw when a test fails
- */
-export class TestFailureError {
-  identifier: TestIdentifer;
-
-  constructor(identifier: TestIdentifer) {
-    this.identifier = identifier;
-  }
-}
