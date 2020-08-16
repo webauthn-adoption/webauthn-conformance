@@ -11,7 +11,7 @@ import AttestationOptionsP3 from './attestation/options/P-3.ts';
  * @param rpURL URL of the Relying Party
  */
 export default async function startTests(rpURL: string): Promise<TestResults> {
-  logger.debug(`starting tests against ${rpURL}`);
+  logger.info(`starting tests against ${rpURL}`);
 
   const promiseResults = await Promise.allSettled([
     AttestationOptionsP1(),
@@ -30,6 +30,9 @@ export default async function startTests(rpURL: string): Promise<TestResults> {
       failed.push((result.reason as TestFailureError).identifier);
     }
   });
+
+  logger.info(`${passed.length} test(s) passed: ${passed.map((test) => test.id).join(', ')}`);
+  logger.info(`${failed.length} test(s) failed: ${failed.map((test) => test.id).join(', ')}`);
 
   const results: TestResults = {
     passed,
