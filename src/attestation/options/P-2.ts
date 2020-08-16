@@ -1,4 +1,4 @@
-import { TestIdentifer, TestFailureError } from "../../types.ts";
+import { TestIdentifer, TestFailureError } from "../../helpers/types.ts";
 
 export default async function AttestationOptionsP2(): Promise<TestIdentifer> {
   throw new TestFailureError({

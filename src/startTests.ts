@@ -1,5 +1,5 @@
-import logger from "./logger.ts";
-import { TestResults, TestIdentifer, TestFailureError } from "./types.ts";
+import logger from "./helpers/logger.ts";
+import { TestResults, TestIdentifer, TestFailureError } from "./helpers/types.ts";
 
 import AttestationOptionsP1 from './attestation/options/P-1.ts';
 import AttestationOptionsP2 from './attestation/options/P-2.ts';

@@ -1,4 +1,4 @@
-import { TestIdentifer } from "../../types.ts";
+import { TestIdentifer } from "../../helpers/types.ts";
 
 export default async function AttestationOptionsP1(): Promise<TestIdentifer> {
   const result: TestIdentifer = {

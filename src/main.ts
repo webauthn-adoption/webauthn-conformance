@@ -1,4 +1,4 @@
-import logger from "./logger.ts";
+import logger from "./helpers/logger.ts";
 import startTests from "./startTests.ts";
 
 /**
