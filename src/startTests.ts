@@ -1,9 +1,13 @@
 import logger from "./helpers/logger.ts";
-import { TestResults, TestIdentifer, TestFailureError } from "./helpers/types.ts";
+import {
+  TestResults,
+  TestIdentifer,
+  TestFailureError,
+} from "./helpers/types.ts";
 
-import AttestationOptionsP1 from './attestation/options/P-1.ts';
-import AttestationOptionsP2 from './attestation/options/P-2.ts';
-import AttestationOptionsP3 from './attestation/options/P-3.ts';
+import AttestationOptionsP1 from "./attestation/options/P-1.ts";
+import AttestationOptionsP2 from "./attestation/options/P-2.ts";
+import AttestationOptionsP3 from "./attestation/options/P-3.ts";
 
 /**
  * Begin conformance tests against the specified Relying Party
@@ -31,8 +35,16 @@ export default async function startTests(rpURL: string): Promise<TestResults> {
     }
   });
 
-  logger.info(`${passed.length} test(s) passed: ${passed.map((test) => test.id).join(', ')}`);
-  logger.info(`${failed.length} test(s) failed: ${failed.map((test) => test.id).join(', ')}`);
+  logger.info(
+    `${passed.length} test(s) passed: ${
+      passed.map((test) => test.id).join(", ")
+    }`,
+  );
+  logger.info(
+    `${failed.length} test(s) failed: ${
+      failed.map((test) => test.id).join(", ")
+    }`,
+  );
 
   const results: TestResults = {
     passed,

@@ -10,8 +10,8 @@ export type TestResults = {
  * Values identifying a given conformance test case
  */
 export type TestIdentifer = {
-  suite: 'attestation' | 'assertion';
-  mode: 'options' | 'response';
+  suite: "attestation" | "assertion";
+  mode: "options" | "response";
   id: string;
 };
 
