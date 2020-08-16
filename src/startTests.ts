@@ -1,6 +1,7 @@
 import logger from "./helpers/logger.ts";
 import TestFailure from "./helpers/TestFailure.ts";
 import TestSuccess from "./helpers/TestSuccess.ts";
+import HTTPClient from "./helpers/HTTPClient.ts";
 
 import AttestationOptionsP1 from "./attestation/options/P-1.ts";
 import AttestationOptionsP2 from "./attestation/options/P-2.ts";
@@ -14,10 +15,12 @@ import AttestationOptionsP3 from "./attestation/options/P-3.ts";
 export default async function startTests(rpURL: string): Promise<TestResults> {
   logger.info(`starting tests against ${rpURL}`);
 
+  const client = new HTTPClient(rpURL);
+
   const promiseResults = await Promise.allSettled([
-    AttestationOptionsP1(),
-    AttestationOptionsP2(),
-    AttestationOptionsP3(),
+    AttestationOptionsP1(client),
+    // AttestationOptionsP2(),
+    // AttestationOptionsP3(),
   ]);
 
   const passed: TestSuccess[] = [];
