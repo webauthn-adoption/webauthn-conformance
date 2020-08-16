@@ -16,4 +16,4 @@ const rpURL = args[0];
 
 const results = await startTests(rpURL);
 
-logger.debug(results);
+logger.debug(JSON.stringify(results, null, 2));
