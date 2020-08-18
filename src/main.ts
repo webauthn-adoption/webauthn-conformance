@@ -1,5 +1,6 @@
 import logger from "./helpers/logger.ts";
 import startTests from "./startTests.ts";
+import logTestResult from "./helpers/logTestResult.ts";
 
 /**
  * Commandline arguments
@@ -16,4 +17,19 @@ const rpURL = args[0];
 
 const results = await startTests(rpURL);
 
-logger.debug(JSON.stringify(results, null, 2));
+// Mash all results together and then sort by test ID
+const allResults = results
+  .sort((a, b) => {
+    const aID = a.identifier.id;
+    const bID = b.identifier.id;
+
+    if (aID < bID) return -1;
+    if (aID > bID) return 1;
+    return 0;
+  });
+
+logger.info("[RESULTS]");
+
+allResults.forEach((test) => {
+  logTestResult(test);
+});
