@@ -4,7 +4,7 @@
 
 To discover a CI/CD-friendly way to administer FIDO Conformance testing.
 
-Ideally we can identify a codebase structure that enables an easy porting of existing tests, while allowing for additional tests that may be relevant specifically for testing WebAuthn Relying Parties.
+Ideally we can identify a codebase structure that enables an easy porting of existing tests, while allowing for the addition of new tests that are specifically for testing WebAuthn Relying Parties.
 
 ## Requirements
 
