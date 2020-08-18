@@ -1,62 +1,42 @@
 import logger from "./helpers/logger.ts";
-import TestFailure from "./helpers/TestFailure.ts";
-import TestSuccess from "./helpers/TestSuccess.ts";
-import HTTPClient from "./helpers/HTTPClient.ts";
+import httpClient from "./helpers/HTTPClient.ts";
+import runTest from "./helpers/runTest.ts";
+import { TestResult } from "./helpers/types.ts";
 
-import AttestationOptionsP1 from "./attestation/options/P-1.ts";
-import AttestationOptionsP2 from "./attestation/options/P-2.ts";
-import AttestationOptionsP3 from "./attestation/options/P-3.ts";
+import attestationOptionsP1 from "./attestation/options/P-1.ts";
+import attestationOptionsP2 from "./attestation/options/P-2.ts";
+import attestationOptionsP3 from "./attestation/options/P-3.ts";
 
 /**
  * Begin conformance tests against the specified Relying Party
  *
  * @param rpURL URL of the Relying Party
  */
-export default async function startTests(rpURL: string): Promise<TestResults> {
-  logger.info(`starting tests against ${rpURL}`);
+export default async function startTests(rpURL: string): Promise<TestResult[]> {
+  logger.info(`Starting tests against ${rpURL}`);
 
-  const client = new HTTPClient(rpURL);
+  // Set an RP URL on the HTTP client singleton
+  httpClient.setRPURL(rpURL);
 
+  // Run all tests
   const promiseResults = await Promise.allSettled([
-    AttestationOptionsP1(client),
-    // AttestationOptionsP2(),
-    // AttestationOptionsP3(),
+    runTest(attestationOptionsP1.id, attestationOptionsP1.test),
+    runTest(attestationOptionsP2.id, attestationOptionsP2.test),
+    runTest(attestationOptionsP3.id, attestationOptionsP3.test),
   ]);
 
-  const passed: TestSuccess[] = [];
-  const failed: TestFailure[] = [];
+  const results: TestResult[] = [];
 
-  // Sort all of the results into passed/failed
+  // Get the test results out from `allSettled()`
   promiseResults.forEach((result) => {
     if (result.status === "fulfilled") {
-      passed.push(result.value);
+      results.push(result.value);
     } else if (result.status === "rejected") {
-      failed.push(result.reason);
+      results.push(result.reason);
     }
   });
 
-  logger.info(
-    `${passed.length} test(s) passed: ${
-      passed.map((test) => test.result.identifier.id).join(", ")
-    }`,
-  );
-  logger.info(
-    `${failed.length} test(s) failed: ${
-      failed.map((test) =>
-        `${test.result.identifier.id} (reason: ${test.result.reason})`
-      ).join(", ")
-    }`,
-  );
-
-  const results: TestResults = {
-    passed,
-    failed,
-  };
+  logger.info("Tests complete\n");
 
   return results;
 }
-
-type TestResults = {
-  passed: TestSuccess[];
-  failed: TestFailure[];
-};
