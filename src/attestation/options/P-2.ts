@@ -1,10 +1,22 @@
-import TestSuccess from "../../helpers/TestSuccess.ts";
-import TestFailure from "../../helpers/TestFailure.ts";
+import httpClient from "../../helpers/HTTPClient.ts";
+import { TestIdentifer } from "../../helpers/types.ts";
+import { assert } from "https://deno.land/std@0.65.0/_util/assert.ts";
 
-export default async function AttestationOptionsP2(): Promise<TestSuccess> {
-  throw new TestFailure({
-    suite: "attestation",
-    mode: "options",
-    id: "P-2",
-  }, "unexpected return value");
+export const attestationOptionsP2ID: TestIdentifer = {
+  suite: "attestation",
+  mode: "options",
+  id: "AttestationOptionsP2",
+};
+
+/**
+ * Check that `options.attestation` can be set to `"none"`
+ */
+export async function attestationOptionsP2Test(): Promise<void> {
+  // Some conditional that is easy to fail
+  assert(httpClient === undefined, "intentionally failed");
 }
+
+export default {
+  id: attestationOptionsP2ID,
+  test: attestationOptionsP2Test,
+};
