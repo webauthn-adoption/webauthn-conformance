@@ -38,5 +38,5 @@ type AttestationOptionsRequestOpts = {
   // TODO Define this properly
   attestation: unknown;
   // TODO Define this properly
-  extensions: unknown;
+  extensions?: unknown;
 };
