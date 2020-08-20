@@ -21,6 +21,17 @@ class HTTPClient {
       body: JSON.stringify(opts),
     });
   }
+
+  /**
+   * POST /attestation/result
+   */
+  async postAttestationResponse(opts: AttestationResponseRequestOpts) {
+    return fetch(`${this.url}/attestation/result`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(opts),
+    });
+  }
 }
 
 const httpClient = new HTTPClient();
@@ -39,4 +50,14 @@ type AttestationOptionsRequestOpts = {
   authenticatorSelection?: unknown;
   // TODO Define this properly
   extensions?: unknown;
+};
+
+type AttestationResponseRequestOpts = {
+  id: string;
+  rawId: string;
+  response: {
+    attestationObject: string;
+    clientDataJSON: string;
+  };
+  type: string;
 };
