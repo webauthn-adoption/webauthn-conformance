@@ -1,8 +1,10 @@
 import httpClient from "../../helpers/HTTPClient.ts";
 import { TestIdentifer } from "../../helpers/types.ts";
-import { assert } from "https://deno.land/std@0.65.0/_util/assert.ts";
+import { asserts } from "../../deps.ts";
 
-export const attestationOptionsP2ID: TestIdentifer = {
+const { assertStrictEquals } = asserts;
+
+const attestationOptionsP2ID: TestIdentifer = {
   suite: "attestation",
   mode: "options",
   id: "AttestationOptionsP2",
@@ -11,9 +13,27 @@ export const attestationOptionsP2ID: TestIdentifer = {
 /**
  * Check that `options.attestation` can be set to `"none"`
  */
-export async function attestationOptionsP2Test(): Promise<void> {
-  // Some conditional that is easy to fail
-  assert(httpClient === undefined, "intentionally failed");
+async function attestationOptionsP2Test(): Promise<void> {
+  const opts = {
+    username: "qjse5WykdS15QAWGXdaP",
+    displayName: "Bilbo Baggins",
+    authenticatorSelection: {
+      requireResidentKey: false,
+      userVerification: "preferred",
+    },
+    attestation: "none",
+  };
+
+  const resp = await httpClient.postAttestationOptions(opts).then((resp) =>
+    resp.json()
+  );
+
+  assertStrictEquals(
+    resp.attestation,
+    opts.attestation,
+    `Client requested that server would set attestation to "none". Server has not returned
+    attestation set to "none"!`,
+  );
 }
 
 export default {
