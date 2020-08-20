@@ -10,6 +10,11 @@ const attestationOptionsP3ID: TestIdentifer = {
   id: "AttestationOptionsP3",
 };
 
+/**
+ * P-3
+ * Get two ServerPublicKeyCredentialCreationOptionsResponses, and check that challenge in Request1
+ * is different to challenge in Request2
+ */
 async function attestationOptionsP3Test(): Promise<void> {
   const opts = {
     username: "MZxsLzeMU0duIIHyJvHS",

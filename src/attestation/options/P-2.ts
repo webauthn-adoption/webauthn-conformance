@@ -11,7 +11,10 @@ const attestationOptionsP2ID: TestIdentifer = {
 };
 
 /**
- * Check that `options.attestation` can be set to `"none"`
+ * P-2
+ * Request from server ServerPublicKeyCredentialCreationOptionsResponse with "none" attestation,
+ * and check that server, and check that
+ * ServerPublicKeyCredentialCreationOptionsResponse.attestation is set to "none"
  */
 async function attestationOptionsP2Test(): Promise<void> {
   const opts = {

@@ -26,7 +26,31 @@ const attestationOptionsP1ID: TestIdentifer = {
 };
 
 /**
- * Test Attestation Options generation happy path
+ * P-1
+ * Get ServerPublicKeyCredentialCreationOptionsResponse, and check that:
+ *     (a) response MUST contain "status" field, and it MUST be of type DOMString and set to "ok"
+ *     (b) response MUST contain "errorMessage" field, and it MUST be of type DOMString and set to
+ *         an empty string
+ *     (c) response contains "user" field, of type Object and:
+ *         (1) check that user.name is not missing, and is of type DOMString
+ *         (2) check that user.displayName is not missing, and is of type DOMString
+ *         (3) check that user.id is not missing, and is of type DOMString, and is not empty. It
+ *             MUST be base64url encoded byte sequence, and is not longer than 64 bytes.
+ *         (4) If user.icon is presented, check that it's is of type DOMString
+ *     (d) response contains "rp" field, of type Object and:
+ *         (1) check that rp.name is not missing, and is of type DOMString
+ *         (2) check that rp.id is not missing, and is of type DOMString.
+ *         (3) If rp.icon is presented, check that it's is of type DOMString
+ *     (e) response contains "challenge" field, of type String, base64url encoded and not less than
+ *         16 bytes.
+ *     (f) response contains "pubKeyCredParams" field, of type Array and:
+ *         (1) each member MUST be of type Object
+ *         (2) each member MUST contain "type" field of type DOMString
+ *         (3) each member MUST contain "alg" field of type Number
+ *         (4) MUST contain one member with type set to "public-key" and alg set to an algorithm
+ *             that is supported by the authenticator
+ *     (g) If response contains "timeout" field, check that it's of type Number and is bigger than 0
+ *     (h) response contains "extensions" field, with "example.extension" key presented
  */
 async function attestationOptionsP1Test(): Promise<void> {
   const opts = {
