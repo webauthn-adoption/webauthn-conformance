@@ -33,10 +33,10 @@ export default httpClient;
 type AttestationOptionsRequestOpts = {
   username: string;
   displayName: string;
-  // TODO Needs to be `AuthenticatorSelectionCriteria` from lib.dom.d.ts
-  authenticatorSelection: unknown;
   // TODO Define this properly
   attestation: unknown;
+  // TODO Needs to be `AuthenticatorSelectionCriteria` from lib.dom.d.ts
+  authenticatorSelection?: unknown;
   // TODO Define this properly
   extensions?: unknown;
 };
