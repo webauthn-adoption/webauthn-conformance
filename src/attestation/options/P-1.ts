@@ -29,23 +29,17 @@ const attestationOptionsP1ID: TestIdentifer = {
  * Test Attestation Options generation happy path
  */
 async function attestationOptionsP1Test(): Promise<void> {
-  const username = "2cKNGn1rOXC5_C0yR08W";
-  const displayName = "Lakeesha Hemstreet";
-  const attestation = "direct";
-  const authenticatorSelection = {
-    "requireResidentKey": false,
-    "userVerification": "preferred",
-  };
-  const extensions = {
-    "example.extension": true,
-  };
-
   const opts = {
-    username,
-    displayName,
-    authenticatorSelection,
-    attestation,
-    extensions,
+    username: "2cKNGn1rOXC5_C0yR08W",
+    displayName: "Lakeesha Hemstreet",
+    authenticatorSelection: {
+      "requireResidentKey": false,
+      "userVerification": "preferred",
+    },
+    attestation: "direct",
+    extensions: {
+      "example.extension": true,
+    },
   };
 
   const resp = await httpClient.postAttestationOptions(opts).then((resp) =>
@@ -112,7 +106,7 @@ async function attestationOptionsP1Test(): Promise<void> {
   );
   assertStrictEquals(
     resp.user.name,
-    username,
+    opts.username,
     "Response.user.name is not set to requested name!",
   );
 
@@ -132,7 +126,7 @@ async function attestationOptionsP1Test(): Promise<void> {
   );
   assertStrictEquals(
     resp.user.displayName,
-    displayName,
+    opts.displayName,
     "Response.user.displayName is not set to requested displayName!",
   );
 
@@ -253,26 +247,26 @@ async function attestationOptionsP1Test(): Promise<void> {
 
   assertStrictEquals(
     resp.attestation,
-    attestation,
-    `Response.attestation "${resp}" was not set to the expected attestation "${attestation}"!`,
+    opts.attestation,
+    `Response.attestation "${resp}" was not set to the expected attestation "${opts.attestation}"!`,
   );
 
   assert(
-    equal(resp.authenticatorSelection, authenticatorSelection),
+    equal(resp.authenticatorSelection, opts.authenticatorSelection),
     `Response.authenticatorSelection MUST be set to the requested authenticatorSelection! Expected "${
       JSON.stringify(
         resp.authenticatorSelection,
       )
-    }" to equal "${JSON.stringify(authenticatorSelection)}"`,
+    }" to equal "${JSON.stringify(opts.authenticatorSelection)}"`,
   );
 
   assert(
-    equal(resp.extensions, extensions),
+    equal(resp.extensions, opts.extensions),
     `Response.extensions MUST be set to the requested extensions! Expected "${
       JSON.stringify(
         resp.extensions,
       )
-    }" to equal "${JSON.stringify(extensions)}"`,
+    }" to equal "${JSON.stringify(opts.extensions)}"`,
   );
 }
 
