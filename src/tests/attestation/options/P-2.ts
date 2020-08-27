@@ -1,4 +1,6 @@
-import httpClient from "../../../helpers/HTTPClient.ts";
+import httpClient, {
+  AttestationOptionsRequestOpts,
+} from "../../../helpers/HTTPClient.ts";
 import { TestIdentifer } from "../../../helpers/types.ts";
 import { assertStrictEquals } from "../../../deps.ts";
 
@@ -15,7 +17,7 @@ const attestationOptionsP2ID: TestIdentifer = {
  * ServerPublicKeyCredentialCreationOptionsResponse.attestation is set to "none"
  */
 async function attestationOptionsP2Test(): Promise<void> {
-  const opts = {
+  const opts: AttestationOptionsRequestOpts = {
     username: "qjse5WykdS15QAWGXdaP",
     displayName: "Bilbo Baggins",
     authenticatorSelection: {

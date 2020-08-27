@@ -1,4 +1,6 @@
-import httpClient from "../../../../helpers/HTTPClient.ts";
+import httpClient, {
+  AttestationOptionsRequestOpts
+} from "../../../../helpers/HTTPClient.ts";
 import { TestIdentifer } from "../../../../helpers/types.ts";
 import { assertNotEquals, assert } from "../../../../deps.ts";
 
@@ -20,7 +22,7 @@ const attestationResponseResp1P1ID: TestIdentifer = {
  *             set to base64url encoded credId from the previous registration
  */
 async function attestationResponseResp1P1Test(): Promise<void> {
-  const opts = {
+  const opts: AttestationOptionsRequestOpts = {
     displayName: "Marcelle Ritchie",
     username: "GU7iv9rnWGMrvEpGqqEP",
     attestation: "direct",

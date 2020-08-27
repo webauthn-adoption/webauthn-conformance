@@ -1,4 +1,6 @@
-import httpClient from "../../../helpers/HTTPClient.ts";
+import httpClient, {
+  AttestationOptionsRequestOpts,
+} from "../../../helpers/HTTPClient.ts";
 import { TestIdentifer } from "../../../helpers/types.ts";
 import {
   assertEquals,
@@ -43,7 +45,7 @@ const attestationOptionsP1ID: TestIdentifer = {
  *     (h) response contains "extensions" field, with "example.extension" key presented
  */
 async function attestationOptionsP1Test(): Promise<void> {
-  const opts = {
+  const opts: AttestationOptionsRequestOpts = {
     username: "2cKNGn1rOXC5_C0yR08W",
     displayName: "Lakeesha Hemstreet",
     authenticatorSelection: {

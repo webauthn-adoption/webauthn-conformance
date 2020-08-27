@@ -1,4 +1,6 @@
-import httpClient from "../../../helpers/HTTPClient.ts";
+import httpClient, {
+  AttestationOptionsRequestOpts,
+} from "../../../helpers/HTTPClient.ts";
 import { TestIdentifer } from "../../../helpers/types.ts";
 import { assertNotEquals } from "../../../deps.ts";
 
@@ -14,7 +16,7 @@ const attestationOptionsP3ID: TestIdentifer = {
  * is different to challenge in Request2
  */
 async function attestationOptionsP3Test(): Promise<void> {
-  const opts = {
+  const opts: AttestationOptionsRequestOpts = {
     username: "MZxsLzeMU0duIIHyJvHS",
     displayName: "Rosalia Jarret",
     authenticatorSelection: {

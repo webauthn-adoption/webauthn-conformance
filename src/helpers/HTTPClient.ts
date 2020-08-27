@@ -41,15 +41,12 @@ const httpClient = new HTTPClient();
  */
 export default httpClient;
 
-type AttestationOptionsRequestOpts = {
+export type AttestationOptionsRequestOpts = {
   username: string;
   displayName: string;
-  // TODO Define this properly
-  attestation: unknown;
-  // TODO Needs to be `AuthenticatorSelectionCriteria` from lib.dom.d.ts
-  authenticatorSelection?: unknown;
-  // TODO Define this properly
-  extensions?: unknown;
+  attestation: AttestationConveyancePreference;
+  authenticatorSelection?: AuthenticatorSelectionCriteria;
+  extensions?: AuthenticationExtensionsClientInputsTemp;
 };
 
 type AttestationResponseRequestOpts = {
@@ -60,4 +57,12 @@ type AttestationResponseRequestOpts = {
     clientDataJSON: string;
   };
   type: string;
+};
+
+/**
+ * `AuthenticationExtensionsClientInputs` in TypeScript's dom.lib.d.ts is woefully out of date
+ * (the spec just moves too fast), so let's maintain a version of it here temporarily
+ */
+type AuthenticationExtensionsClientInputsTemp = {
+  [key: string]: boolean;
 };
