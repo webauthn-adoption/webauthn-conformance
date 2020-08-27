@@ -1,23 +1,13 @@
 import httpClient from "../../helpers/HTTPClient.ts";
 import { TestIdentifer } from "../../helpers/types.ts";
-import { asserts } from "../../deps.ts";
-
-const {
+import {
   assertEquals,
   assertNotEquals,
   assertStrictEquals,
   assertMatch,
   equal,
-  AssertionError,
-} = asserts;
-
-// Deno complains that "'assert' needs an explicit type annotation." when I try to use `assert` as
-// exported from `asserts`, so I copy-pasted it here where it works fine for some reason
-function assert(expr: unknown, msg = ""): asserts expr {
-  if (!expr) {
-    throw new AssertionError(msg);
-  }
-}
+  assert,
+} from "../../deps.ts";
 
 const attestationOptionsP1ID: TestIdentifer = {
   suite: "attestation",
