@@ -1,5 +1,5 @@
-import httpClient from "../../helpers/HTTPClient.ts";
-import { TestIdentifer } from "../../helpers/types.ts";
+import httpClient from "../../../helpers/HTTPClient.ts";
+import { TestIdentifer } from "../../../helpers/types.ts";
 import {
   assertEquals,
   assertNotEquals,
@@ -7,7 +7,7 @@ import {
   assertMatch,
   equal,
   assert,
-} from "../../deps.ts";
+} from "../../../deps.ts";
 
 const attestationOptionsP1ID: TestIdentifer = {
   suite: "attestation",

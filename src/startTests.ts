@@ -3,10 +3,10 @@ import httpClient from "./helpers/HTTPClient.ts";
 import runTest from "./helpers/runTest.ts";
 import { TestResult } from "./helpers/types.ts";
 
-import attestationOptionsP1 from "./attestation/options/P-1.ts";
-import attestationOptionsP2 from "./attestation/options/P-2.ts";
-import attestationOptionsP3 from "./attestation/options/P-3.ts";
-import AttestationResponseResp1P1 from "./attestation/response/Resp-1/P-1.ts";
+import attestationOptionsP1 from "./tests/attestation/options/P-1.ts";
+import attestationOptionsP2 from "./tests/attestation/options/P-2.ts";
+import attestationOptionsP3 from "./tests/attestation/options/P-3.ts";
+import AttestationResponseResp1P1 from "./tests/attestation/response/Resp-1/P-1.ts";
 
 /**
  * Begin conformance tests against the specified Relying Party
