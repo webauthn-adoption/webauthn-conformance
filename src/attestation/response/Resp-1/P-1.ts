@@ -1,9 +1,6 @@
 import httpClient from "../../../helpers/HTTPClient.ts";
 import { TestIdentifer } from "../../../helpers/types.ts";
-import { asserts } from "../../../deps.ts";
-import { assert } from "https://deno.land/std@0.65.0/testing/asserts.ts";
-
-const { assertNotEquals, assert: assert2 } = asserts;
+import { assertNotEquals, assert } from "../../../deps.ts";
 
 const attestationResponseResp1P1ID: TestIdentifer = {
   suite: "attestation",
