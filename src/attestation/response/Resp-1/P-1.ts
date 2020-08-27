@@ -59,11 +59,11 @@ async function attestationResponseResp1P1Test(): Promise<void> {
   );
   assert(
     Array.isArray(opts2.excludeCredentials),
-    "Response.excludeCredentials is not of type Sequence!",
+    "Response.excludeCredentials is not of type Sequence",
   );
   assert(
     opts2.excludeCredentials.length > 0,
-    "Response.excludeCredentials is empty!",
+    "Response.excludeCredentials is empty",
   );
 
   for (let cred of opts2.excludeCredentials) {
@@ -76,7 +76,7 @@ async function attestationResponseResp1P1Test(): Promise<void> {
         JSON.stringify(opts2.excludeCredentials)
       }" to include "${
         JSON.stringify({ "type": "public-key", "id": credId })
-      }"!`,
+      }"`,
     );
   }
 }

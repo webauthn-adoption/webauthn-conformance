@@ -37,7 +37,7 @@ async function attestationOptionsP3Test(): Promise<void> {
   assertNotEquals(
     resp1.challenge,
     resp2.challenge,
-    `Server must generate a unique challenge for each attestation!`,
+    `Server must generate a unique challenge for each attestation`,
   );
 }
 

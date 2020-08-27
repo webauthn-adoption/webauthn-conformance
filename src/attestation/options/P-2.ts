@@ -34,8 +34,7 @@ async function attestationOptionsP2Test(): Promise<void> {
   assertStrictEquals(
     resp.attestation,
     opts.attestation,
-    `Client requested that server would set attestation to "none". Server has not returned
-    attestation set to "none"!`,
+    `Client requested "none" attestation, but RP returned "${resp.attestation}" attestation`,
   );
 }
 

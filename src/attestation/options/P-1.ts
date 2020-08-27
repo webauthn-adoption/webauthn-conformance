@@ -78,7 +78,7 @@ async function attestationOptionsP1Test(): Promise<void> {
   assertEquals(
     typeof resp.status,
     "string",
-    "Response.status MUST be of type DOMString!",
+    "Response.status MUST be of type DOMString",
   );
   assertStrictEquals(
     resp.status,
@@ -95,12 +95,12 @@ async function attestationOptionsP1Test(): Promise<void> {
   assertEquals(
     typeof resp.errorMessage,
     "string",
-    "Response.errorMessage MUST be of type DOMString!",
+    "Response.errorMessage MUST be of type DOMString",
   );
 
   assert(
     resp.errorMessage.length < 1,
-    "Response.errorMessage MUST be empty when OK!",
+    "Response.errorMessage MUST be empty when OK",
   );
 
   /* ----- User ----- */
@@ -112,7 +112,7 @@ async function attestationOptionsP1Test(): Promise<void> {
   assertEquals(
     typeof resp.user,
     "object",
-    "Response.user MUST be of type Object!",
+    "Response.user MUST be of type Object",
   );
   assertNotEquals(
     resp.user.name,
@@ -122,16 +122,16 @@ async function attestationOptionsP1Test(): Promise<void> {
   assertEquals(
     typeof resp.user.name,
     "string",
-    "Response.user.name is not of type DOMString!",
+    "Response.user.name is not of type DOMString",
   );
   assert(
     resp.user.name.length > 0,
-    "Response.user.name is empty!",
+    "Response.user.name is empty",
   );
   assertStrictEquals(
     resp.user.name,
     opts.username,
-    "Response.user.name is not set to requested name!",
+    "Response.user.name is not set to requested name",
   );
 
   assertNotEquals(
@@ -142,16 +142,16 @@ async function attestationOptionsP1Test(): Promise<void> {
   assertEquals(
     typeof resp.user.displayName,
     "string",
-    "Response.user.displayName is not of type DOMString!",
+    "Response.user.displayName is not of type DOMString",
   );
   assert(
     resp.user.displayName.length > 0,
-    "Response.user.displayName is empty!",
+    "Response.user.displayName is empty",
   );
   assertStrictEquals(
     resp.user.displayName,
     opts.displayName,
-    "Response.user.displayName is not set to requested displayName!",
+    "Response.user.displayName is not set to requested displayName",
   );
 
   assertNotEquals(
@@ -162,27 +162,27 @@ async function attestationOptionsP1Test(): Promise<void> {
   assertEquals(
     typeof resp.user.id,
     "string",
-    "Response.user.id is not of type DOMString!",
+    "Response.user.id is not of type DOMString",
   );
   assert(
     resp.user.id.length > 0,
-    "Response.user.id is empty!",
+    "Response.user.id is empty",
   );
   assertMatch(
     resp.user.id,
     /^[a-zA-Z0-9_-]+$/,
-    "Response.user.id MUST be base64URL(without padding) encoded!",
+    "Response.user.id MUST be base64URL(without padding) encoded",
   );
 
   if (resp.user.icon) {
     assertEquals(
       typeof resp.user.icon,
       "string",
-      "Response.user.icon is not of type DOMString!",
+      "Response.user.icon is not of type DOMString",
     );
     assert(
       resp.user.icon.length > 0,
-      "Response.user.icon is empty!",
+      "Response.user.icon is empty",
     );
   }
 
@@ -200,22 +200,22 @@ async function attestationOptionsP1Test(): Promise<void> {
   assertEquals(
     typeof resp.rp.name,
     "string",
-    "Response.rp.name is not of type DOMString!",
+    "Response.rp.name is not of type DOMString",
   );
   assert(
     resp.rp.name.length > 0,
-    "Response.rp.name is empty!",
+    "Response.rp.name is empty",
   );
 
   if (resp.rp.id) {
     assertEquals(
       typeof resp.rp.id,
       "string",
-      "Response.rp.id is not of type DOMString!",
+      "Response.rp.id is not of type DOMString",
     );
     assert(
       resp.rp.id.length > 0,
-      "Response.rp.id is empty!",
+      "Response.rp.id is empty",
     );
   }
 
@@ -223,11 +223,11 @@ async function attestationOptionsP1Test(): Promise<void> {
     assertEquals(
       typeof resp.rp.icon,
       "string",
-      "Response.rp.icon is not of type DOMString!",
+      "Response.rp.icon is not of type DOMString",
     );
     assert(
       resp.rp.icon.length > 0,
-      "Response.rp.icon is empty!",
+      "Response.rp.icon is empty",
     );
   }
 
@@ -239,16 +239,16 @@ async function attestationOptionsP1Test(): Promise<void> {
   assertEquals(
     typeof resp.challenge,
     "string",
-    "Response.challenge MUST be of type DOMString!",
+    "Response.challenge MUST be of type DOMString",
   );
   assertMatch(
     resp.challenge,
     /^[a-zA-Z0-9_-]+$/,
-    "Response.challenge MUST be base64URL(without padding) encoded!",
+    "Response.challenge MUST be base64URL(without padding) encoded",
   );
   assert(
     resp.challenge.length > 21,
-    "Response.challenge MUST be at least 16 bytes long!",
+    `Response.challenge must be at least 21 bytes long but was ${resp.challenge.length} bytes`,
   );
 
   assertNotEquals(
@@ -261,18 +261,18 @@ async function attestationOptionsP1Test(): Promise<void> {
     assertEquals(
       typeof resp.timeout,
       "number",
-      "Response.timeout MUST be of type Number!",
+      "Response.timeout MUST be of type Number",
     );
     assert(
       resp.timeout > 0,
-      "Response.timeout MUST bigger than 0!",
+      "Response.timeout MUST bigger than 0",
     );
   }
 
   assertStrictEquals(
     resp.attestation,
     opts.attestation,
-    `Response.attestation "${resp}" was not set to the expected attestation "${opts.attestation}"!`,
+    `Response.attestation "${resp}" was not set to the expected attestation "${opts.attestation}"`,
   );
 
   assert(
