@@ -1,3 +1,5 @@
+import { AttestationCredentialJSON, PublicKeyCredentialCreationOptionsJSON } from "../deps.ts";
+
 /**
  * HTTP client to contain all of the request URLs used in testing.
  */
@@ -25,7 +27,7 @@ class HTTPClient {
   /**
    * POST /attestation/result
    */
-  async postAttestationResponse(opts: AttestationResponseRequestOpts) {
+  async postAttestationResponse(opts: AttestationCredentialJSON) {
     return fetch(`${this.url}/attestation/result`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -47,16 +49,6 @@ export type AttestationOptionsRequestOpts = {
   attestation: AttestationConveyancePreference;
   authenticatorSelection?: AuthenticatorSelectionCriteria;
   extensions?: AuthenticationExtensionsClientInputsTemp;
-};
-
-type AttestationResponseRequestOpts = {
-  id: string;
-  rawId: string;
-  response: {
-    attestationObject: string;
-    clientDataJSON: string;
-  };
-  type: string;
 };
 
 /**

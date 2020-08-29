@@ -17,3 +17,13 @@ export {
   assert,
   AssertionError,
 } from "https://deno.land/std@0.65.0/testing/asserts.ts";
+
+/**
+ * Third-party packages
+ */
+export {
+  AttestationCredentialJSON,
+  PublicKeyCredentialCreationOptionsJSON,
+  AuthenticatorAttestationResponseJSON,
+  AssertionCredentialJSON,
+} from "https://unpkg.com/@simplewebauthn/typescript-types@0.8.2/dist/index.d.ts";
