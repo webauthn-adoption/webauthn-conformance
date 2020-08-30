@@ -4,6 +4,7 @@
   "description": "A CI/CD-friendly way to administer FIDO Conformance testing",
   "main": "src/main.ts",
   "scripts": {
+    "start": "ts-node src/main.ts",
     "dev": "nodemon src/main.ts",
     "lint": "prettier --write src/ && eslint --fix src/"
   },
