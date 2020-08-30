@@ -1,0 +1,30 @@
+{
+  "name": "webauthn-conformance",
+  "version": "1.0.0",
+  "description": "A CI/CD-friendly way to administer FIDO Conformance testing",
+  "main": "src/main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webauthn-adoption/webauthn-conformance.git"
+  },
+  "keywords": [
+    "webauthn",
+    "fido",
+    "conformance",
+    "cli"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webauthn-adoption/webauthn-conformance/issues"
+  },
+  "homepage": "https://github.com/webauthn-adoption/webauthn-conformance#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  }
+}
