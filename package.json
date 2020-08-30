@@ -4,7 +4,6 @@
   "description": "A CI/CD-friendly way to administer FIDO Conformance testing",
   "main": "src/main.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/main.ts",
     "lint": "prettier --write src/ && eslint --fix src/"
   },
