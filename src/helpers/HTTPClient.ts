@@ -1,10 +1,11 @@
-import { AttestationCredentialJSON, PublicKeyCredentialCreationOptionsJSON } from "../deps.ts";
+import fetch from 'node-fetch';
+import type { AttestationCredentialJSON } from '@simplewebauthn/typescript-types';
 
 /**
  * HTTP client to contain all of the request URLs used in testing.
  */
 class HTTPClient {
-  private url: string = "";
+  private url: string = '';
 
   /**
    * Specify the URL to the Relying Party being tested
@@ -18,8 +19,8 @@ class HTTPClient {
    */
   async postAttestationOptions(opts: AttestationOptionsRequestOpts) {
     return fetch(`${this.url}/attestation/options`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(opts),
     });
   }
@@ -29,8 +30,8 @@ class HTTPClient {
    */
   async postAttestationResponse(opts: AttestationCredentialJSON) {
     return fetch(`${this.url}/attestation/result`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(opts),
     });
   }

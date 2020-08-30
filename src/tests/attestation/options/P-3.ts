@@ -1,13 +1,12 @@
-import httpClient, {
-  AttestationOptionsRequestOpts,
-} from "../../../helpers/HTTPClient.ts";
-import { TestIdentifer } from "../../../helpers/types.ts";
-import { assertNotEquals } from "../../../deps.ts";
+import assert from 'assert';
+
+import httpClient, { AttestationOptionsRequestOpts } from '../../../helpers/HTTPClient';
+import { TestIdentifer } from '../../../helpers/types';
 
 const attestationOptionsP3ID: TestIdentifer = {
-  suite: "attestation",
-  mode: "options",
-  id: "AttestationOptionsP3",
+  suite: 'attestation',
+  mode: 'options',
+  id: 'AttestationOptionsP3',
 };
 
 /**
@@ -17,27 +16,23 @@ const attestationOptionsP3ID: TestIdentifer = {
  */
 async function attestationOptionsP3Test(): Promise<void> {
   const opts: AttestationOptionsRequestOpts = {
-    username: "MZxsLzeMU0duIIHyJvHS",
-    displayName: "Rosalia Jarret",
+    username: 'MZxsLzeMU0duIIHyJvHS',
+    displayName: 'Rosalia Jarret',
     authenticatorSelection: {
       requireResidentKey: false,
-      userVerification: "preferred",
+      userVerification: 'preferred',
     },
-    attestation: "direct",
+    attestation: 'direct',
   };
 
-  const resp1 = await httpClient.postAttestationOptions(opts).then((resp) =>
-    resp.json()
-  );
+  const resp1 = await httpClient.postAttestationOptions(opts).then((resp) => resp.json());
 
-  const resp2 = await httpClient.postAttestationOptions(opts).then((resp) =>
-    resp.json()
-  );
+  const resp2 = await httpClient.postAttestationOptions(opts).then((resp) => resp.json());
 
-  assertNotEquals(
+  assert.notEqual(
     resp1.challenge,
     resp2.challenge,
-    `Server must generate a unique challenge for each attestation`,
+    'Server must generate a unique challenge for each attestation',
   );
 }
 

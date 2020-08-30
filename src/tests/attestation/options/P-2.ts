@@ -1,13 +1,12 @@
-import httpClient, {
-  AttestationOptionsRequestOpts,
-} from "../../../helpers/HTTPClient.ts";
-import { TestIdentifer } from "../../../helpers/types.ts";
-import { assertStrictEquals } from "../../../deps.ts";
+import assert from 'assert';
+
+import httpClient, { AttestationOptionsRequestOpts } from '../../../helpers/HTTPClient';
+import { TestIdentifer } from '../../../helpers/types';
 
 const attestationOptionsP2ID: TestIdentifer = {
-  suite: "attestation",
-  mode: "options",
-  id: "AttestationOptionsP2",
+  suite: 'attestation',
+  mode: 'options',
+  id: 'AttestationOptionsP2',
 };
 
 /**
@@ -18,20 +17,18 @@ const attestationOptionsP2ID: TestIdentifer = {
  */
 async function attestationOptionsP2Test(): Promise<void> {
   const opts: AttestationOptionsRequestOpts = {
-    username: "qjse5WykdS15QAWGXdaP",
-    displayName: "Bilbo Baggins",
+    username: 'qjse5WykdS15QAWGXdaP',
+    displayName: 'Bilbo Baggins',
     authenticatorSelection: {
       requireResidentKey: false,
-      userVerification: "preferred",
+      userVerification: 'preferred',
     },
-    attestation: "none",
+    attestation: 'none',
   };
 
-  const resp = await httpClient.postAttestationOptions(opts).then((resp) =>
-    resp.json()
-  );
+  const resp = await httpClient.postAttestationOptions(opts).then((_resp) => _resp.json());
 
-  assertStrictEquals(
+  assert.strictEqual(
     resp.attestation,
     opts.attestation,
     `Client requested "none" attestation, but RP returned "${resp.attestation}" attestation`,

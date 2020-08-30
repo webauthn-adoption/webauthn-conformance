@@ -1,20 +1,12 @@
-import httpClient, {
-  AttestationOptionsRequestOpts,
-} from "../../../helpers/HTTPClient.ts";
-import { TestIdentifer } from "../../../helpers/types.ts";
-import {
-  assertEquals,
-  assertNotEquals,
-  assertStrictEquals,
-  assertMatch,
-  equal,
-  assert,
-} from "../../../deps.ts";
+import assert from 'assert';
+
+import httpClient, { AttestationOptionsRequestOpts } from '../../../helpers/HTTPClient';
+import type { TestIdentifer } from '../../../helpers/types';
 
 const attestationOptionsP1ID: TestIdentifer = {
-  suite: "attestation",
-  mode: "options",
-  id: "AttestationOptionsP1",
+  suite: 'attestation',
+  mode: 'options',
+  id: 'AttestationOptionsP1',
 };
 
 /**
@@ -46,243 +38,132 @@ const attestationOptionsP1ID: TestIdentifer = {
  */
 async function attestationOptionsP1Test(): Promise<void> {
   const opts: AttestationOptionsRequestOpts = {
-    username: "2cKNGn1rOXC5_C0yR08W",
-    displayName: "Lakeesha Hemstreet",
+    username: '2cKNGn1rOXC5_C0yR08W',
+    displayName: 'Lakeesha Hemstreet',
     authenticatorSelection: {
-      "requireResidentKey": false,
-      "userVerification": "preferred",
+      requireResidentKey: false,
+      userVerification: 'preferred',
     },
-    attestation: "direct",
+    attestation: 'direct',
     extensions: {
-      "example.extension": true,
+      'example.extension': true,
     },
   };
 
-  const resp = await httpClient.postAttestationOptions(opts).then((resp) =>
-    resp.json()
-  );
+  const resp = await httpClient.postAttestationOptions(opts).then((_resp) => _resp.json());
 
-  assertNotEquals(
-    resp.status,
-    undefined,
-    'Response is missing "status" field!',
-  );
-  assertEquals(
-    typeof resp.status,
-    "string",
-    "Response.status MUST be of type DOMString",
-  );
-  assertStrictEquals(
-    resp.status,
-    "ok",
-    'Response.status MUST be set to "ok"!',
-  );
+  assert.notEqual(resp.status, undefined, 'Response is missing "status" field!');
+  assert.equal(typeof resp.status, 'string', 'Response.status MUST be of type DOMString');
+  assert.strictEqual(resp.status, 'ok', 'Response.status MUST be set to "ok"!');
 
-  assertNotEquals(
-    resp.errorMessage,
-    undefined,
-    'Response is missing "errorMessage" field!',
-  );
+  assert.notEqual(resp.errorMessage, undefined, 'Response is missing "errorMessage" field!');
 
-  assertEquals(
+  assert.equal(
     typeof resp.errorMessage,
-    "string",
-    "Response.errorMessage MUST be of type DOMString",
+    'string',
+    'Response.errorMessage MUST be of type DOMString',
   );
 
-  assert(
-    resp.errorMessage.length < 1,
-    "Response.errorMessage MUST be empty when OK",
-  );
+  assert(resp.errorMessage.length < 1, 'Response.errorMessage MUST be empty when OK');
 
   /* ----- User ----- */
-  assertNotEquals(
-    resp.user,
-    undefined,
-    'Response is missing "user" field!',
-  );
-  assertEquals(
-    typeof resp.user,
-    "object",
-    "Response.user MUST be of type Object",
-  );
-  assertNotEquals(
-    resp.user.name,
-    undefined,
-    'Response.user missing "name" field!',
-  );
-  assertEquals(
-    typeof resp.user.name,
-    "string",
-    "Response.user.name is not of type DOMString",
-  );
-  assert(
-    resp.user.name.length > 0,
-    "Response.user.name is empty",
-  );
-  assertStrictEquals(
+  assert.notEqual(resp.user, undefined, 'Response is missing "user" field!');
+  assert.equal(typeof resp.user, 'object', 'Response.user MUST be of type Object');
+  assert.notEqual(resp.user.name, undefined, 'Response.user missing "name" field!');
+  assert.equal(typeof resp.user.name, 'string', 'Response.user.name is not of type DOMString');
+  assert(resp.user.name.length > 0, 'Response.user.name is empty');
+  assert.strictEqual(
     resp.user.name,
     opts.username,
-    "Response.user.name is not set to requested name",
+    'Response.user.name is not set to requested name',
   );
 
-  assertNotEquals(
-    resp.user.displayName,
-    undefined,
-    'Response.user missing "displayName" field!',
-  );
-  assertEquals(
+  assert.notEqual(resp.user.displayName, undefined, 'Response.user missing "displayName" field!');
+  assert.equal(
     typeof resp.user.displayName,
-    "string",
-    "Response.user.displayName is not of type DOMString",
+    'string',
+    'Response.user.displayName is not of type DOMString',
   );
-  assert(
-    resp.user.displayName.length > 0,
-    "Response.user.displayName is empty",
-  );
-  assertStrictEquals(
+  assert(resp.user.displayName.length > 0, 'Response.user.displayName is empty');
+  assert.strictEqual(
     resp.user.displayName,
     opts.displayName,
-    "Response.user.displayName is not set to requested displayName",
+    'Response.user.displayName is not set to requested displayName',
   );
 
-  assertNotEquals(
-    typeof resp.user.id,
-    undefined,
-    'Response.user missing "id" field!',
-  );
-  assertEquals(
-    typeof resp.user.id,
-    "string",
-    "Response.user.id is not of type DOMString",
-  );
-  assert(
-    resp.user.id.length > 0,
-    "Response.user.id is empty",
-  );
-  assertMatch(
+  assert.notEqual(typeof resp.user.id, undefined, 'Response.user missing "id" field!');
+  assert.equal(typeof resp.user.id, 'string', 'Response.user.id is not of type DOMString');
+  assert(resp.user.id.length > 0, 'Response.user.id is empty');
+  assert.match(
     resp.user.id,
     /^[a-zA-Z0-9_-]+$/,
-    "Response.user.id MUST be base64URL(without padding) encoded",
+    'Response.user.id MUST be base64URL(without padding) encoded',
   );
 
   if (resp.user.icon) {
-    assertEquals(
-      typeof resp.user.icon,
-      "string",
-      "Response.user.icon is not of type DOMString",
-    );
-    assert(
-      resp.user.icon.length > 0,
-      "Response.user.icon is empty",
-    );
+    assert.equal(typeof resp.user.icon, 'string', 'Response.user.icon is not of type DOMString');
+    assert(resp.user.icon.length > 0, 'Response.user.icon is empty');
   }
 
   /* ----- RP ----- */
-  assertNotEquals(
-    typeof resp.rp,
-    undefined,
-    'Response is missing "rp" field!',
-  );
-  assertNotEquals(
-    typeof resp.rp.name,
-    undefined,
-    'Response.rp missing "name" field!',
-  );
-  assertEquals(
-    typeof resp.rp.name,
-    "string",
-    "Response.rp.name is not of type DOMString",
-  );
-  assert(
-    resp.rp.name.length > 0,
-    "Response.rp.name is empty",
-  );
+  assert.notEqual(typeof resp.rp, undefined, 'Response is missing "rp" field!');
+  assert.notEqual(typeof resp.rp.name, undefined, 'Response.rp missing "name" field!');
+  assert.equal(typeof resp.rp.name, 'string', 'Response.rp.name is not of type DOMString');
+  assert(resp.rp.name.length > 0, 'Response.rp.name is empty');
 
   if (resp.rp.id) {
-    assertEquals(
-      typeof resp.rp.id,
-      "string",
-      "Response.rp.id is not of type DOMString",
-    );
-    assert(
-      resp.rp.id.length > 0,
-      "Response.rp.id is empty",
-    );
+    assert.equal(typeof resp.rp.id, 'string', 'Response.rp.id is not of type DOMString');
+    assert(resp.rp.id.length > 0, 'Response.rp.id is empty');
   }
 
   if (resp.rp.icon) {
-    assertEquals(
-      typeof resp.rp.icon,
-      "string",
-      "Response.rp.icon is not of type DOMString",
-    );
-    assert(
-      resp.rp.icon.length > 0,
-      "Response.rp.icon is empty",
-    );
+    assert.equal(typeof resp.rp.icon, 'string', 'Response.rp.icon is not of type DOMString');
+    assert(resp.rp.icon.length > 0, 'Response.rp.icon is empty');
   }
 
-  assertNotEquals(
-    typeof resp.challenge,
-    undefined,
-    'Response is missing "challenge" field!',
-  );
-  assertEquals(
-    typeof resp.challenge,
-    "string",
-    "Response.challenge MUST be of type DOMString",
-  );
-  assertMatch(
+  assert.notEqual(typeof resp.challenge, undefined, 'Response is missing "challenge" field!');
+  assert.equal(typeof resp.challenge, 'string', 'Response.challenge MUST be of type DOMString');
+  assert.match(
     resp.challenge,
     /^[a-zA-Z0-9_-]+$/,
-    "Response.challenge MUST be base64URL(without padding) encoded",
+    'Response.challenge MUST be base64URL(without padding) encoded',
   );
   assert(
     resp.challenge.length > 21,
     `Response.challenge must be at least 21 bytes long but was ${resp.challenge.length} bytes`,
   );
 
-  assertNotEquals(
+  assert.notEqual(
     typeof resp.pubKeyCredParams,
     undefined,
     'Response is missing "pubKeyCredParams" field!',
   );
 
   if (resp.timeout) {
-    assertEquals(
-      typeof resp.timeout,
-      "number",
-      "Response.timeout MUST be of type Number",
-    );
-    assert(
-      resp.timeout > 0,
-      "Response.timeout MUST bigger than 0",
-    );
+    assert.equal(typeof resp.timeout, 'number', 'Response.timeout MUST be of type Number');
+    assert(resp.timeout > 0, 'Response.timeout MUST bigger than 0');
   }
 
-  assertStrictEquals(
+  assert.strictEqual(
     resp.attestation,
     opts.attestation,
     `Response.attestation "${resp}" was not set to the expected attestation "${opts.attestation}"`,
   );
 
-  assert(
-    equal(resp.authenticatorSelection, opts.authenticatorSelection),
-    `Response.authenticatorSelection MUST be set to the requested authenticatorSelection! Expected "${
-      JSON.stringify(
-        resp.authenticatorSelection,
-      )
-    }" to equal "${JSON.stringify(opts.authenticatorSelection)}"`,
+  assert.deepEqual(
+    resp.authenticatorSelection,
+    opts.authenticatorSelection,
+    `Response.authenticatorSelection MUST be set to the requested authenticatorSelection! Expected "${JSON.stringify(
+      resp.authenticatorSelection,
+    )}" to equal "${JSON.stringify(opts.authenticatorSelection)}"`,
   );
 
-  assert(
-    equal(resp.extensions, opts.extensions),
-    `Response.extensions MUST be set to the requested extensions! Expected "${
-      JSON.stringify(
-        resp.extensions,
-      )
-    }" to equal "${JSON.stringify(opts.extensions)}"`,
+  assert.deepEqual(
+    resp.extensions,
+    opts.extensions,
+    `Response.extensions MUST be set to the requested extensions! Expected "${JSON.stringify(
+      resp.extensions,
+    )}" to equal "${JSON.stringify(opts.extensions)}"`,
   );
 }
 
