@@ -1,5 +1,18 @@
 {
   "compilerOptions": {
-    "lib": [ "dom", "deno.ns"]
-  }
+    "target": "ES2019",
+    "module": "CommonJS",
+    "lib": ["DOM", "ES2020"],
+    "allowJs": false,
+    "sourceMap": true,
+    // "outFile": "./",
+    // "outDir": "./",
+    // "rootDir": "./",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.test.ts"]
 }
