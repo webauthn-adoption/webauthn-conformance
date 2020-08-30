@@ -1,17 +1,5 @@
-import { log } from "../deps.ts";
+import pino from 'pino';
 
-await log.setup({
-  handlers: {
-    console: new log.handlers.ConsoleHandler("DEBUG"),
-  },
-  loggers: {
-    webauthn: {
-      level: "DEBUG",
-      handlers: ["console"],
-    },
-  },
-});
-
-const logger = log.getLogger("webauthn");
+const logger = pino({ name: 'webauthn' });
 
 export default logger;
