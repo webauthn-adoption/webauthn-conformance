@@ -3,7 +3,7 @@
  */
 export type TestResult = {
   identifier: TestIdentifer;
-  result: "passed" | "failed";
+  result: 'passed' | 'failed';
   reason?: string;
 };
 
@@ -11,7 +11,7 @@ export type TestResult = {
  * Values identifying a given conformance test case
  */
 export type TestIdentifer = {
-  suite: "attestation" | "assertion";
-  mode: "options" | "response";
+  suite: 'attestation' | 'assertion';
+  mode: 'options' | 'response';
   id: string;
 };

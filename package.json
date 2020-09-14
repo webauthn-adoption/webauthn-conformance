@@ -1,0 +1,64 @@
+{
+  "name": "webauthn-conformance",
+  "version": "1.0.0",
+  "description": "A CI/CD-friendly way to administer FIDO Conformance testing",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "ts-node src/main.ts",
+    "dev": "nodemon src/main.ts",
+    "lint": "prettier --write src/ && eslint --fix src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webauthn-adoption/webauthn-conformance.git"
+  },
+  "keywords": [
+    "webauthn",
+    "fido",
+    "conformance",
+    "cli"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webauthn-adoption/webauthn-conformance/issues"
+  },
+  "homepage": "https://github.com/webauthn-adoption/webauthn-conformance#readme",
+  "devDependencies": {
+    "@simplewebauthn/typescript-types": "^0.8.2",
+    "@types/node": "^14.6.2",
+    "@types/node-fetch": "^2.5.7",
+    "@types/pino": "^6.3.0",
+    "@types/uuid": "^8.3.0",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
+    "@typescript-eslint/parser": "^3.10.1",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-typescript": "^9.0.0",
+    "eslint-plugin-import": "^2.22.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.13",
+    "nodemon": "^2.0.4",
+    "pino-pretty": "^4.2.0",
+    "prettier": "^2.1.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "base64url": "^3.0.1",
+    "node-fetch": "^2.6.0",
+    "pino": "^6.5.1",
+    "uuid": "^8.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}

@@ -1,16 +1,17 @@
-import {
-  AuthenticatorAttestationResponseJSON,
+import type {
+  AttestationCredentialJSON,
   PublicKeyCredentialCreationOptionsJSON,
-} from "../deps.ts";
-import { generateCredentialID } from "./utils/generateCredentialID.ts";
+} from '@simplewebauthn/typescript-types';
+
+import generateCredentialID from './utils/generateCredentialID';
 
 /**
  * A "software authenticator" capable of generating a basic attestation response, not including
  * an attestationObject.
  */
-export function generateBasicAttestationResponse(
+export default function generateBasicAttestationResponse(
   opts: PublicKeyCredentialCreationOptionsJSON,
-): AuthenticatorAttestationResponseJSON {
+): BasicAttestationCredentialJSON {
   console.log(opts);
 
   const credentialID = generateCredentialID();
@@ -18,5 +19,18 @@ export function generateBasicAttestationResponse(
   return {
     id: credentialID,
     rawId: credentialID,
+    response: {
+      clientDataJSON: '',
+    },
+    type: 'public-key',
+  };
+}
+
+/**
+ * Temporary for now, this should eventually be replaced directly with `AttestationCredentialJSON`
+ */
+interface BasicAttestationCredentialJSON extends Omit<AttestationCredentialJSON, 'response'> {
+  response: {
+    clientDataJSON: string;
   };
 }

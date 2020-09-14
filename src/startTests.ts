@@ -1,7 +1,7 @@
-import logger from "./helpers/logger.ts";
-import httpClient from "./helpers/HTTPClient.ts";
-import { TestResult } from "./helpers/types.ts";
-import { runAllTests } from "./tests/index.ts";
+import logger from './helpers/logger';
+import httpClient from './helpers/HTTPClient';
+import { TestResult } from './helpers/types';
+import runAllTests from './tests/index';
 
 /**
  * Begin conformance tests against the specified Relying Party
@@ -21,14 +21,14 @@ export default async function startTests(rpURL: string): Promise<TestResult[]> {
 
   // Get the test results out from `allSettled()`
   promiseResults.forEach((result) => {
-    if (result.status === "fulfilled") {
+    if (result.status === 'fulfilled') {
       results.push(result.value);
-    } else if (result.status === "rejected") {
+    } else if (result.status === 'rejected') {
       results.push(result.reason);
     }
   });
 
-  logger.info("Tests complete\n");
+  logger.info('Tests complete\n');
 
   return results;
 }

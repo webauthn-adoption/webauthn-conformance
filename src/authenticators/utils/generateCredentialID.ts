@@ -1,5 +1,6 @@
-import { uuidv4, base64URLEncode } from "../../deps.ts";
+import { v4 as uuidv4 } from 'uuid';
+import base64url from 'base64url';
 
-export function generateCredentialID(): string {
-  return base64URLEncode(uuidv4.generate());
+export default function generateCredentialID(): string {
+  return base64url.encode(uuidv4());
 }

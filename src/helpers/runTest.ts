@@ -1,5 +1,5 @@
-import { TestResult, TestIdentifer } from "./types.ts";
-import logger from "./logger.ts";
+import type { TestResult, TestIdentifer } from './types';
+import logger from './logger';
 
 /**
  * Helper method to execute individual tests and report back on the results
@@ -20,7 +20,7 @@ export default async function runTest(
     // Test failed. Make sure to include the reason why
     return {
       identifier,
-      result: "failed",
+      result: 'failed',
       reason: err.message,
     };
   }
@@ -28,6 +28,6 @@ export default async function runTest(
   // Test passed!
   return {
     identifier,
-    result: "passed",
+    result: 'passed',
   };
 }
