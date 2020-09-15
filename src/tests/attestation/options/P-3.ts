@@ -29,7 +29,7 @@ async function attestationOptionsP3Test(): Promise<void> {
 
   const resp2 = await httpClient.postAttestationOptions(opts).then((resp) => resp.json());
 
-  assert.notEqual(
+  assert.notStrictEqual(
     resp1.challenge,
     resp2.challenge,
     'Server must generate a unique challenge for each attestation',

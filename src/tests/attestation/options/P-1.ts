@@ -52,13 +52,13 @@ async function attestationOptionsP1Test(): Promise<void> {
 
   const resp = await httpClient.postAttestationOptions(opts).then((_resp) => _resp.json());
 
-  assert.notEqual(resp.status, undefined, 'Response is missing "status" field!');
-  assert.equal(typeof resp.status, 'string', 'Response.status MUST be of type DOMString');
+  assert.notStrictEqual(resp.status, undefined, 'Response is missing "status" field!');
+  assert.strictEqual(typeof resp.status, 'string', 'Response.status MUST be of type DOMString');
   assert.strictEqual(resp.status, 'ok', 'Response.status MUST be set to "ok"!');
 
-  assert.notEqual(resp.errorMessage, undefined, 'Response is missing "errorMessage" field!');
+  assert.notStrictEqual(resp.errorMessage, undefined, 'Response is missing "errorMessage" field!');
 
-  assert.equal(
+  assert.strictEqual(
     typeof resp.errorMessage,
     'string',
     'Response.errorMessage MUST be of type DOMString',
@@ -67,10 +67,14 @@ async function attestationOptionsP1Test(): Promise<void> {
   assert(resp.errorMessage.length < 1, 'Response.errorMessage MUST be empty when OK');
 
   /* ----- User ----- */
-  assert.notEqual(resp.user, undefined, 'Response is missing "user" field!');
-  assert.equal(typeof resp.user, 'object', 'Response.user MUST be of type Object');
-  assert.notEqual(resp.user.name, undefined, 'Response.user missing "name" field!');
-  assert.equal(typeof resp.user.name, 'string', 'Response.user.name is not of type DOMString');
+  assert.notStrictEqual(resp.user, undefined, 'Response is missing "user" field!');
+  assert.strictEqual(typeof resp.user, 'object', 'Response.user MUST be of type Object');
+  assert.notStrictEqual(resp.user.name, undefined, 'Response.user missing "name" field!');
+  assert.strictEqual(
+    typeof resp.user.name,
+    'string',
+    'Response.user.name is not of type DOMString',
+  );
   assert(resp.user.name.length > 0, 'Response.user.name is empty');
   assert.strictEqual(
     resp.user.name,
@@ -78,8 +82,12 @@ async function attestationOptionsP1Test(): Promise<void> {
     'Response.user.name is not set to requested name',
   );
 
-  assert.notEqual(resp.user.displayName, undefined, 'Response.user missing "displayName" field!');
-  assert.equal(
+  assert.notStrictEqual(
+    resp.user.displayName,
+    undefined,
+    'Response.user missing "displayName" field!',
+  );
+  assert.strictEqual(
     typeof resp.user.displayName,
     'string',
     'Response.user.displayName is not of type DOMString',
@@ -91,8 +99,8 @@ async function attestationOptionsP1Test(): Promise<void> {
     'Response.user.displayName is not set to requested displayName',
   );
 
-  assert.notEqual(typeof resp.user.id, undefined, 'Response.user missing "id" field!');
-  assert.equal(typeof resp.user.id, 'string', 'Response.user.id is not of type DOMString');
+  assert.notStrictEqual(typeof resp.user.id, undefined, 'Response.user missing "id" field!');
+  assert.strictEqual(typeof resp.user.id, 'string', 'Response.user.id is not of type DOMString');
   assert(resp.user.id.length > 0, 'Response.user.id is empty');
   assert.match(
     resp.user.id,
@@ -101,28 +109,36 @@ async function attestationOptionsP1Test(): Promise<void> {
   );
 
   if (resp.user.icon) {
-    assert.equal(typeof resp.user.icon, 'string', 'Response.user.icon is not of type DOMString');
+    assert.strictEqual(
+      typeof resp.user.icon,
+      'string',
+      'Response.user.icon is not of type DOMString',
+    );
     assert(resp.user.icon.length > 0, 'Response.user.icon is empty');
   }
 
   /* ----- RP ----- */
-  assert.notEqual(typeof resp.rp, undefined, 'Response is missing "rp" field!');
-  assert.notEqual(typeof resp.rp.name, undefined, 'Response.rp missing "name" field!');
-  assert.equal(typeof resp.rp.name, 'string', 'Response.rp.name is not of type DOMString');
+  assert.notStrictEqual(typeof resp.rp, undefined, 'Response is missing "rp" field!');
+  assert.notStrictEqual(typeof resp.rp.name, undefined, 'Response.rp missing "name" field!');
+  assert.strictEqual(typeof resp.rp.name, 'string', 'Response.rp.name is not of type DOMString');
   assert(resp.rp.name.length > 0, 'Response.rp.name is empty');
 
   if (resp.rp.id) {
-    assert.equal(typeof resp.rp.id, 'string', 'Response.rp.id is not of type DOMString');
+    assert.strictEqual(typeof resp.rp.id, 'string', 'Response.rp.id is not of type DOMString');
     assert(resp.rp.id.length > 0, 'Response.rp.id is empty');
   }
 
   if (resp.rp.icon) {
-    assert.equal(typeof resp.rp.icon, 'string', 'Response.rp.icon is not of type DOMString');
+    assert.strictEqual(typeof resp.rp.icon, 'string', 'Response.rp.icon is not of type DOMString');
     assert(resp.rp.icon.length > 0, 'Response.rp.icon is empty');
   }
 
-  assert.notEqual(typeof resp.challenge, undefined, 'Response is missing "challenge" field!');
-  assert.equal(typeof resp.challenge, 'string', 'Response.challenge MUST be of type DOMString');
+  assert.notStrictEqual(typeof resp.challenge, undefined, 'Response is missing "challenge" field!');
+  assert.strictEqual(
+    typeof resp.challenge,
+    'string',
+    'Response.challenge MUST be of type DOMString',
+  );
   assert.match(
     resp.challenge,
     /^[a-zA-Z0-9_-]+$/,
@@ -133,14 +149,14 @@ async function attestationOptionsP1Test(): Promise<void> {
     `Response.challenge must be at least 21 bytes long but was ${resp.challenge.length} bytes`,
   );
 
-  assert.notEqual(
+  assert.notStrictEqual(
     typeof resp.pubKeyCredParams,
     undefined,
     'Response is missing "pubKeyCredParams" field!',
   );
 
   if (resp.timeout) {
-    assert.equal(typeof resp.timeout, 'number', 'Response.timeout MUST be of type Number');
+    assert.strictEqual(typeof resp.timeout, 'number', 'Response.timeout MUST be of type Number');
     assert(resp.timeout > 0, 'Response.timeout MUST bigger than 0');
   }
 
@@ -150,7 +166,7 @@ async function attestationOptionsP1Test(): Promise<void> {
     `Response.attestation "${resp}" was not set to the expected attestation "${opts.attestation}"`,
   );
 
-  assert.deepEqual(
+  assert.deepStrictEqual(
     resp.authenticatorSelection,
     opts.authenticatorSelection,
     `Response.authenticatorSelection MUST be set to the requested authenticatorSelection! Expected "${JSON.stringify(
@@ -158,7 +174,7 @@ async function attestationOptionsP1Test(): Promise<void> {
     )}" to equal "${JSON.stringify(opts.authenticatorSelection)}"`,
   );
 
-  assert.deepEqual(
+  assert.deepStrictEqual(
     resp.extensions,
     opts.extensions,
     `Response.extensions MUST be set to the requested extensions! Expected "${JSON.stringify(
