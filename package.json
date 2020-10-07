@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "base64url": "^3.0.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "pino": "^6.5.1",
     "uuid": "^8.3.0"
   },
